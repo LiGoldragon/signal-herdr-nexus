@@ -1,0 +1,57 @@
+Signal
+[]                                                    ; imports
+[ Create.Workspace                                    ; inputs: one request per connection
+  Start.{ Pane Command Label }
+  Prompt.{ Pane Text }
+  Press.{ Pane Keys }
+  Close.Pane
+  List.Session
+  Subscribe.Session ]
+[ Created.Outcome                                     ; outputs: every request receives one answer
+  Started.Outcome
+  Prompted.Outcome
+  Pressed.Outcome
+  Closed.Outcome
+  Listed.Outcome
+  Subscribed.Outcome
+  Changed.{ Pane State } ]                            ; pushed on the acknowledged subscription stream
+[ Session.String                                      ; types
+  PaneId.String
+  Pane.{ Session PaneId }
+  Root.String
+  Name.String
+  Value.String
+  Variable.{ Name Value }
+  Workspace.{ Session Root Vector<Variable> }
+  AgentName.String
+  AgentKind.[ Pi Claude Codex Gemini Cursor Devin Agy Cline Omp
+              Mastracode Opencode Copilot Kimi Kiro Droid Amp Grok
+              Hermes Kilo Qodercli Qwen Maki ]
+  Program.String
+  Executable.[ Configured Explicit.Program ]
+  Command.{ AgentName AgentKind Executable Vector<String> }
+  Text.String
+  Keys.Vector<String>
+  Label.String
+  State.[ Open Busy Idle Dead ]
+  Known.{ Pane Label State }
+  ErrorCode.String
+  ExitStatus.Integer
+  Message.String
+  Refusal.{ ErrorCode Option<ExitStatus> Message }
+  MemoryRefusal.Message
+  Unknown.Pane
+  ObservedEffect.[ Done
+                   Created.Pane
+                   Listed.Vector<Known> ]
+  StorePhase.[ BeforeEmission
+               Observed.ObservedEffect
+               Uncertain ]
+  StoreRefusal.{ MemoryRefusal StorePhase }
+  Outcome.[ Done
+            Created.Pane
+            Listed.Vector<Known>
+            Refused.Refusal
+            Unknown.Pane
+            Uncertain
+            StoreRefused.StoreRefusal ] ]
