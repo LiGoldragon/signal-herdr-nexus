@@ -16,6 +16,9 @@ Signal
   Subscribed.Outcome
   Changed.{ Pane State } ]                            ; pushed on the acknowledged subscription stream
 [ Session.String                                      ; types
+  InstanceId.String
+  Sequence.Integer
+  CreationId.{ InstanceId Sequence }
   PaneId.String
   Pane.{ Session PaneId }
   Root.String
