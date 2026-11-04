@@ -130,7 +130,7 @@ pub enum Attempt {
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Known {
     pub pane: Pane,
-    pub label: Label,
+    pub label_option: std::option::Option<Label>,
     pub state: State,
     pub attempt: Attempt,
 }
@@ -268,7 +268,6 @@ pub enum Response {
     Subscribed(Outcome),
     Changed(Changed_Data),
 }
-/// The authored schema whose digest identifies this contract on the wire.
 pub const ETHOS: &str = include_str!("../signal.ethos");
 
 impl signal::Contracted for Query {

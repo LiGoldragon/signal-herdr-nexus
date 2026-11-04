@@ -35,7 +35,7 @@ Signal
   Label.String
   State.[ Open Busy Idle Dead ]
   Attempt.[ Settled Uncertain ]
-  Known.{ Pane Label State Attempt }
+  Known.{ Pane Option<Label> State Attempt }
   ErrorCode.String
   ExitStatus.Integer
   Message.String
