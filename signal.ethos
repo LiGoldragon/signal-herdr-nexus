@@ -34,7 +34,8 @@ Signal
   Keys.Vector<String>
   Label.String
   State.[ Open Busy Idle Dead ]
-  Known.{ Pane Label State }
+  Attempt.[ Settled Uncertain ]
+  Known.{ Pane Label State Attempt }
   ErrorCode.String
   ExitStatus.Integer
   Message.String
