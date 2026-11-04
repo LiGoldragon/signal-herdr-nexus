@@ -180,12 +180,17 @@ pub struct StoreRefusal {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct AttemptInProgress(pub Pane);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Outcome {
     Done,
     Created(Pane),
     Listed(std::vec::Vec<Known>),
     Refused(Refusal),
     Unknown(Pane),
+    AttemptInProgress(AttemptInProgress),
     Uncertain,
     StoreRefused(StoreRefusal),
 }
@@ -243,7 +248,6 @@ pub enum Response {
     Subscribed(Outcome),
     Changed(Changed_Data),
 }
-
 /// The authored schema whose digest identifies this contract on the wire.
 pub const ETHOS: &str = include_str!("../signal.ethos");
 

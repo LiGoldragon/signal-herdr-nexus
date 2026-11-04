@@ -48,10 +48,12 @@ Signal
                Observed.ObservedEffect
                Uncertain ]
   StoreRefusal.{ MemoryRefusal StorePhase }
+  AttemptInProgress.Pane
   Outcome.[ Done
             Created.Pane
             Listed.Vector<Known>
             Refused.Refusal
             Unknown.Pane
+            AttemptInProgress
             Uncertain
             StoreRefused.StoreRefusal ] ]
