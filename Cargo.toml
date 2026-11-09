@@ -12,7 +12,7 @@ default = []
 datom = ["dep:datom-codec", "dep:protos"]
 
 [dependencies]
-datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "eabead4", optional = true }
+datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "8fa03af", optional = true }
 protos = { git = "https://github.com/LiGoldragon/protos", rev = "3c7ade3", optional = true }
 rkyv = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
-signal = { git = "https://github.com/LiGoldragon/signal", rev = "7afb68b", default-features = false }
+signal = { git = "https://github.com/LiGoldragon/signal", rev = "19148e0", default-features = false }
