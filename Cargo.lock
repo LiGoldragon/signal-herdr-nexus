@@ -49,23 +49,23 @@ version = "0.33.0"
 source = "git+https://github.com/LiGoldragon/datom-codec?rev=eabead4#eabead48b31e8d4f429d7fb156dd18548bbd79c1"
 dependencies = [
  "datom-codec-derive 0.32.3 (git+https://github.com/LiGoldragon/datom-codec?rev=eabead4)",
- "protos",
+ "protos 0.33.0 (git+https://github.com/LiGoldragon/protos?rev=3c7ade3)",
  "rkyv",
 ]
 
 [[package]]
 name = "datom-codec"
 version = "0.33.1"
-source = "git+https://github.com/LiGoldragon/datom-codec?rev=8fa03af#8fa03afb94f9be84acdaa402f79f7f4a804defd7"
+source = "git+https://github.com/LiGoldragon/datom-codec?rev=0bbeb11#0bbeb11b692606f85b5c60187b14586802cb4701"
 dependencies = [
- "datom-codec-derive 0.32.3 (git+https://github.com/LiGoldragon/datom-codec?rev=8fa03af)",
- "protos",
+ "datom-codec-derive 0.32.3 (git+https://github.com/LiGoldragon/datom-codec?rev=0bbeb11)",
+ "protos 0.33.0 (git+https://github.com/LiGoldragon/protos?rev=4024614)",
 ]
 
 [[package]]
 name = "datom-codec-derive"
 version = "0.32.3"
-source = "git+https://github.com/LiGoldragon/datom-codec?rev=8fa03af#8fa03afb94f9be84acdaa402f79f7f4a804defd7"
+source = "git+https://github.com/LiGoldragon/datom-codec?rev=0bbeb11#0bbeb11b692606f85b5c60187b14586802cb4701"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -96,7 +96,7 @@ dependencies = [
  "datom-codec 0.33.0",
  "prettyplease",
  "proc-macro2",
- "protos",
+ "protos 0.33.0 (git+https://github.com/LiGoldragon/protos?rev=3c7ade3)",
  "quote",
  "rkyv",
  "syn 3.0.9",
@@ -207,6 +207,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "protos"
+version = "0.33.0"
+source = "git+https://github.com/LiGoldragon/protos?rev=4024614#4024614f1298bafcce7cb1bf1741005df6b0ef88"
+
+[[package]]
 name = "ptr_meta"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -304,7 +309,7 @@ name = "signal-herdr-nexus"
 version = "0.2.0"
 dependencies = [
  "datom-codec 0.33.1",
- "protos",
+ "protos 0.33.0 (git+https://github.com/LiGoldragon/protos?rev=4024614)",
  "rkyv",
  "signal",
 ]
