@@ -1,5 +1,9 @@
 # Upgrades
 
+## 0.4.0 — signal 11.0.0
+
+Only the signal pin moves: signal 11.0.0 (6d4eb74), which carries no transport feature and no tokio; the datom feature keeps signal/datom. Datom-codec 09a0526 and protos c93b598 stay. No change to the authored ethos, the generated Rust, the archive or the Datom text.
+
 ## 0.3.2 — the datom feature carries signal/datom
 
 The `datom` feature now also turns on signal's `datom` feature, the edge the build base's feature set asks of a repository that builds signal with it. The pins stay: signal 10.4.1 (d77169d), datom-codec 09a0526, protos c93b598. No change to the authored ethos, the generated Rust, the archive or the Datom text.

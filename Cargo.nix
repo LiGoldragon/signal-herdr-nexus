@@ -908,14 +908,14 @@ rec {
       };
       "signal" = rec {
         crateName = "signal";
-        version = "10.4.1";
+        version = "11.0.0";
         edition = "2024";
         links = "signal";
         workspace_member = null;
         src = pkgs.fetchgit {
           url = "https://github.com/LiGoldragon/signal";
-          rev = "d77169d061d0d0d7913415257d0f1c1603260583";
-          sha256 = "1rmh26a9qp0j80r5d733kw9s6gfdj6sd8y14vhphqfpvssa079ah";
+          rev = "6d4eb74a238ea4a6149bd12c42a8c06aec01b154";
+          sha256 = "0hqy8k58s6sc9wz76k8iq40bv636js5s951zgd01ncrxcy6h776a";
         };
         dependencies = [
           {
@@ -947,13 +947,12 @@ rec {
         ];
         features = {
           "datom" = [ "dep:datom-codec" "dep:protos" ];
-          "transport" = [ "dep:tokio" ];
         };
         resolvedDefaultFeatures = [ "datom" ];
       };
       "signal-herdr-nexus" = rec {
         crateName = "signal-herdr-nexus";
-        version = "0.3.2";
+        version = "0.4.0";
         edition = "2021";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         libName = "signal_herdr_nexus";
