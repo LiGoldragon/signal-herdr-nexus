@@ -919,6 +919,16 @@ rec {
         };
         dependencies = [
           {
+            name = "datom-codec";
+            packageId = "datom-codec";
+            optional = true;
+          }
+          {
+            name = "protos";
+            packageId = "protos";
+            optional = true;
+          }
+          {
             name = "rkyv";
             packageId = "rkyv";
             usesDefaultFeatures = false;
@@ -939,10 +949,11 @@ rec {
           "datom" = [ "dep:datom-codec" "dep:protos" ];
           "transport" = [ "dep:tokio" ];
         };
+        resolvedDefaultFeatures = [ "datom" ];
       };
       "signal-herdr-nexus" = rec {
         crateName = "signal-herdr-nexus";
-        version = "0.3.1";
+        version = "0.3.2";
         edition = "2021";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         libName = "signal_herdr_nexus";
@@ -970,7 +981,7 @@ rec {
           }
         ];
         features = {
-          "datom" = [ "dep:datom-codec" "dep:protos" ];
+          "datom" = [ "dep:datom-codec" "dep:protos" "signal/datom" ];
         };
         resolvedDefaultFeatures = [ "datom" "default" ];
       };

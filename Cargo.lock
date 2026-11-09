@@ -281,14 +281,16 @@ name = "signal"
 version = "10.4.1"
 source = "git+https://github.com/LiGoldragon/signal?rev=d77169d#d77169d061d0d0d7913415257d0f1c1603260583"
 dependencies = [
+ "datom-codec",
  "ethos-zero",
+ "protos",
  "rkyv",
  "thiserror",
 ]
 
 [[package]]
 name = "signal-herdr-nexus"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "datom-codec",
  "protos",

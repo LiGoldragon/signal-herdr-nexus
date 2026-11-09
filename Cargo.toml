@@ -1,6 +1,6 @@
 [package]
 name = "signal-herdr-nexus"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2021"
 rust-version = "1.89"
 
@@ -9,7 +9,7 @@ path = "src/lib.rs"
 
 [features]
 default = []
-datom = ["dep:datom-codec", "dep:protos"]
+datom = ["dep:datom-codec", "dep:protos", "signal/datom"]
 
 [dependencies]
 datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "09a0526", optional = true }
