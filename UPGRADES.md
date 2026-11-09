@@ -1,5 +1,11 @@
 # Upgrades
 
+## 0.3.0 — signal 10.4.0, datom-codec 0bbeb11, protos 4024614
+
+Only the pins move: signal 10.4.0 (7e6dfe5), datom-codec 0.33.1 (0bbeb11) and protos
+0.33.0 (4024614). No change to the authored ethos, the generated Rust, the archive or the
+Datom text. A consumer repins the three together.
+
 ## 0.2.0 — signal 10.3.0, datom-codec 0.33.0, protos 0.33.0
 
 Repins signal 10.3.0 (7afb), datom-codec 0.33.0 (eabe) and protos 0.33.0 (3c7a), each spelled as signal spells it so the lock holds one source of each. signal 10.3.0 changes its exchange ledger, not `Contracted`, `Signalizable` or `Restorable`, which this contract uses unchanged.
