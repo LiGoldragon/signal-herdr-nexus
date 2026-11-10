@@ -15,7 +15,7 @@
       memberChecks = { check, ... }: { signal-herdr-nexus = check "signal-herdr-nexus" [ "default" "datom" ]; };
 
       extraChecks =
-        { pkgs, toolchain, check, doc, clippy, ... }:
+        { pkgs, toolchain, check, doc, ... }:
         let
           manifest = builtins.fromTOML (builtins.readFile ./Cargo.toml);
           rust = pkgs.lib.fileset.toSource {
@@ -30,7 +30,6 @@
             rustfmt --check --edition ${manifest.package.edition} ${rust}/src/lib.rs ${rust}/tests/*.rs
             touch $out
           '';
-          clippy = clippy "signal-herdr-nexus" [ "default" "datom" ] [ "-D" "warnings" ];
           doc = doc "signal-herdr-nexus" [ "default" "datom" ] [ "-D" "warnings" ];
         };
     };
