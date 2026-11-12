@@ -1,5 +1,5 @@
 Signal
-[]                                                    ; imports
+[ :observation_status:[ Session ObservationStatus ] ] ; imports: shared source-status anatomy
 [ Create.Workspace                                    ; inputs: one request per connection
   Start.{ Pane Command Label }
   Prompt.{ Pane Text }
@@ -14,9 +14,9 @@ Signal
   Closed.Outcome
   Listed.Outcome
   Subscribed.Outcome
-  Changed.{ Pane State } ]                            ; pushed on the acknowledged subscription stream
-[ Session.String                                      ; types
-  InstanceId.String
+  Changed.{ Pane State }                              ; observed state changes
+  ObservationStatus ]                            ; pushed on the acknowledged subscription stream
+[ InstanceId.String                                   ; types
   Sequence.Integer
   CreationId.{ InstanceId Sequence }
   PaneId.String

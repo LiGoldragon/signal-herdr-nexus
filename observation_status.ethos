@@ -1,0 +1,18 @@
+Library
+[]                                                    ; imports
+[ Session.String                                      ; types: session identity shared with the ordinary Signal
+  SourceGeneration.Integer                            ; local positive source-lifetime fence, never an upstream cursor
+  SourceFailure.[ Closed                              ; terminal source failure, distinct from attachment preparation
+                  TransportRefused.{ SocketPath.String ; native connection evidence
+                                     FailureMessage.String }
+                  ProtocolRefused.String              ; upstream protocol refusal
+                  DeadlineExpired                     ; attachment/progress deadline
+                  ResourceLimit.String ]              ; bounded resource refusal
+  Unavailable.[ Attaching                             ; source attachment not yet acknowledged
+                SourceFailure ]                       ; terminal cause, carried bare
+  SourceStatus.[ AvailableUnverified                  ; attached without a continuity guarantee
+                 Unavailable ]                        ; unavailable cause, carried bare
+  ObservationStatus.{ Session SourceGeneration        ; source status of one session generation
+                      SourceStatus } ]
+[]                                                    ; traits
+[]                                                    ; associations
