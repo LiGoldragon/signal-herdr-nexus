@@ -7,10 +7,6 @@
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct Session(pub String);
-#[rustfmt::skip]
-#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct InstanceId(pub String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -31,7 +27,7 @@ pub struct PaneId(pub String);
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Pane {
-    pub session: Session,
+    pub session: observation_status::Session,
     pub pane_id: PaneId,
 }
 #[rustfmt::skip]
@@ -57,7 +53,7 @@ pub struct Variable {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Workspace {
-    pub session: Session,
+    pub session: observation_status::Session,
     pub root: Root,
     pub variable_vector: std::vec::Vec<Variable>,
 }
@@ -187,10 +183,6 @@ pub struct MemoryRefusal(pub Message);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct Unknown(pub Pane);
-#[rustfmt::skip]
-#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum ObservedEffect {
     Done,
     Created(Pane),
@@ -214,17 +206,13 @@ pub struct StoreRefusal {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct AttemptInProgress(pub Pane);
-#[rustfmt::skip]
-#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Outcome {
     Done,
     Created(Pane),
     Listed(std::vec::Vec<Known>),
     Refused(Refusal),
     Unknown(Pane),
-    AttemptInProgress(AttemptInProgress),
+    AttemptInProgress(Pane),
     Unavailable(TransportRefusal),
     Uncertain,
     StoreRefused(StoreRefusal),
@@ -260,8 +248,8 @@ pub enum Query {
     Prompt(Prompt_Data),
     Press(Press_Data),
     Close(Pane),
-    List(Session),
-    Subscribe(Session),
+    List(observation_status::Session),
+    Subscribe(observation_status::Session),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -282,11 +270,21 @@ pub enum Response {
     Listed(Outcome),
     Subscribed(Outcome),
     Changed(Changed_Data),
+    ObservationStatus(observation_status::ObservationStatus),
 }
+
+// Shared generated schema, with the legacy root Session export preserved.
+pub mod observation_status;
+pub use observation_status::{ObservationStatus, Session, SourceGeneration, SourceStatus};
+
 pub const ETHOS: &str = include_str!("../signal.ethos");
 
 impl signal::Contracted for Query {
-    const CONTRACT_SOURCE: &'static str = ETHOS;
+    const CONTRACT_SOURCE: &'static str = concat!(
+        include_str!("../signal.ethos"),
+        "\n",
+        include_str!("../observation_status.ethos"),
+    );
 }
 
 #[cfg(test)]

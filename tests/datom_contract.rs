@@ -53,3 +53,44 @@ fn wrong_shapes_and_unknown_variants_are_refused() {
     assert!(read::<Query>("Press.{ main }").is_err());
     assert!(read::<Response>("Changed.{ { main wQ:pT } Sleeping }").is_err());
 }
+
+#[test]
+fn repaired_outcomes_have_direct_pane_payloads_and_preserve_datom() {
+    use signal_herdr_nexus::{Outcome, Pane, PaneId, Session};
+    let pane = Pane {
+        session: Session("main".into()),
+        pane_id: PaneId("wQ:pT".into()),
+    };
+    for (source, expected) in [
+        ("Unknown.{ main wQ:pT }", Outcome::Unknown(pane.clone())),
+        (
+            "AttemptInProgress.{ main wQ:pT }",
+            Outcome::AttemptInProgress(pane),
+        ),
+    ] {
+        let value = read::<Outcome>(source).expect("a direct pane payload reads");
+        assert_eq!(value, expected);
+        assert_eq!(print(&value), source);
+        round_trip::<Outcome>(source);
+    }
+}
+
+#[test]
+fn observation_status_shapes_round_trip_without_a_meta_surface() {
+    for source in [
+        "ObservationStatus.{ main 41 AvailableUnverified }",
+        "ObservationStatus.{ main 41 Unavailable.Attaching }",
+        "ObservationStatus.{ main 41 Unavailable.SourceFailure.Closed }",
+        "ObservationStatus.{ main 41 Unavailable.SourceFailure.DeadlineExpired }",
+        "ObservationStatus.{ main 41 Unavailable.SourceFailure.TransportRefused.{ /tmp/herdr.sock «connection refused» } }",
+    ] {
+        round_trip::<Response>(source);
+    }
+}
+
+#[test]
+fn terminal_source_failure_cannot_be_preparation() {
+    use signal_herdr_nexus::observation_status::SourceFailure;
+    assert!(read::<SourceFailure>("Attaching").is_err());
+    round_trip::<SourceFailure>("Closed");
+}
