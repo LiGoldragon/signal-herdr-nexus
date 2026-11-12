@@ -46,7 +46,6 @@ Signal
   Refusal.{ ErrorCode Option<ExitStatus> Message }
   TransportRefusal.{ SocketPath Message }
   MemoryRefusal.Message
-  Unknown.Pane
   ObservedEffect.[ Done
                    Created.Pane
                    Listed.Vector<Known> ]
@@ -54,13 +53,11 @@ Signal
                Observed.ObservedEffect
                Uncertain ]
   StoreRefusal.{ MemoryRefusal StorePhase }
-  AttemptInProgress.Pane
   Outcome.[ Done
             Created.Pane
             Listed.Vector<Known>
             Refused.Refusal
-            Unknown.Pane
-            AttemptInProgress
+                      AttemptInProgress.Pane
             Unavailable.TransportRefusal
             Uncertain
             StoreRefused.StoreRefusal ] ]
