@@ -57,7 +57,8 @@ Signal
             Created.Pane
             Listed.Vector<Known>
             Refused.Refusal
-                      AttemptInProgress.Pane
+            Unknown.Pane
+            AttemptInProgress.Pane
             Unavailable.TransportRefusal
             Uncertain
             StoreRefused.StoreRefusal ] ]
